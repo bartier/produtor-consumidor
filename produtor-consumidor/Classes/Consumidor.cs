@@ -8,5 +8,21 @@ namespace produtor_consumidor.Classes
 {
     class Consumidor
     {
+        private String nome;
+        private Buffer bufferCompartilhado;
+
+
+        public Consumidor(string nome, Buffer bufferCompartilhado)
+        {
+            this.nome = nome;
+            this.bufferCompartilhado = bufferCompartilhado;
+        }
+
+        public string Nome { get => nome; }
+
+        public void Consumir()
+        {
+            throw new Exception();
+        }
     }
 }
