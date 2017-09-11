@@ -18,7 +18,7 @@ namespace produtor_consumidor.Classes
             this.bufferCompartilhado = bufferCompartilhado;
         }
 
-        public string Nome { get => nome; }
+        public string Nome { get { return nome; } }
 
         public void Consumir()
         {

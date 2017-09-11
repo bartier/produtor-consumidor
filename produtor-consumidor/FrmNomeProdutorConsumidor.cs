@@ -21,7 +21,7 @@ namespace produtor_consumidor
             lblEntidade.Text = entidade + ":";
         }
 
-        public string Entidade { get => entidade; }
+        public string Entidade { get { return entidade; } }
 
         public string NomeDaEntidade
         {

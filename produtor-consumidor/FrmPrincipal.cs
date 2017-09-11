@@ -15,6 +15,8 @@ namespace produtor_consumidor
 {
     public partial class FrmPrincipal : Form
     {
+        Semaphore console = new Semaphore(1, 1);
+
         private Consumidor consumidor;
         private Produtor produtor;
         private Classes.Buffer buffer;
@@ -72,7 +74,7 @@ namespace produtor_consumidor
             }
 
             txtMensagens.Text = "";
-            escreverMensagem(produtor.Nome, "Oi, tudo bem " + consumidor.Nome + "?" + " Irei produzir para você algumas bananas!");
+            escreverMensagem(produtor.Nome, "Oi, tudo bem " + consumidor.Nome + "?" + " Irei produzir para você algumas bananas!\n");
             escreverMensagem(consumidor.Nome, "Tudo bem, " + produtor.Nome + "!" + "Estarei no aguardo =)");
 
             iniciadoSimulacao = true;
@@ -85,14 +87,14 @@ namespace produtor_consumidor
         {
             string linha = nome + ": " + mensagem;
             
-            new Thread(() => UpdateTextBoxText(txtMensagens, linha)).Start();
+            new Task(() => UpdateTextBoxText(txtMensagens, linha)).Start();
         }
 
         private void escreverMensagem(string mensagem)
         {
             string linha = mensagem;
 
-            new Thread(() => UpdateTextBoxText(txtMensagens, mensagem)).Start();
+            new Task(() => UpdateTextBoxText(txtMensagens, mensagem)).Start();
         }
 
         private void UpdateTextBoxText(TextBox textBox, string content)
@@ -100,10 +102,13 @@ namespace produtor_consumidor
             //the method will invoke itself on the main thread if it isn't already running there
             if (InvokeRequired)
             {
+                console.WaitOne();
                 this.Invoke((MethodInvoker)(() => UpdateTextBoxText(textBox, content)));
+                console.Release();
                 return;
             }
 
+            
             for (int i = 0; i < content.Length; i++)
             {
                 try
@@ -115,6 +120,7 @@ namespace produtor_consumidor
                 catch (Exception)
                 { }
             }
+            
         }
 
         private void btnSobre_Click(object sender, EventArgs e)
