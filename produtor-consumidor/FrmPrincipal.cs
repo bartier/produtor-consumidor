@@ -15,6 +15,8 @@ namespace produtor_consumidor
 {
     public partial class FrmPrincipal : Form
     {
+        public const int TAMANHO_BUFFER = 5;
+
         Semaphore console = new Semaphore(1, 1);
 
         private Consumidor consumidor;
@@ -40,7 +42,7 @@ namespace produtor_consumidor
 
             // inicializa o buffer com 5 posicoes disponiveis conforme
             // o formulario (5 pictureBox's)
-            buffer = new Classes.Buffer(5);
+            buffer = new Classes.Buffer(TAMANHO_BUFFER);
 
             // Criação do produtor chamando o formulário genérico
             FrmNomeProdutorConsumidor frmGenerico = new FrmNomeProdutorConsumidor("Produtor");
@@ -125,7 +127,7 @@ namespace produtor_consumidor
 
         private void btnSobre_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Informação...", "Sobre:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("RA: 16174 - Gustavo Ramalho\n RA: 16196 - Vitor Bartier", "Sobre:", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

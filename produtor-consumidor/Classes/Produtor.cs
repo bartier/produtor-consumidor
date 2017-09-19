@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace produtor_consumidor.Classes
@@ -10,6 +11,7 @@ namespace produtor_consumidor.Classes
     {
         private string nome;
         private Buffer bufferCompartilhado;
+        private Thread thread;
 
         /// <summary>
         /// Instancia um produtor com um nome e buffer associado a ele para produção.
@@ -27,7 +29,10 @@ namespace produtor_consumidor.Classes
         public void Produzir()
         {
             // provavel que seja fazer a chamada do método Set do buffer
-            throw new Exception();
+           
+            
+            bufferCompartilhado.Set(1);
+
         }
 
     }

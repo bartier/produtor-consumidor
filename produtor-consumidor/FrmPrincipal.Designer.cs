@@ -42,6 +42,7 @@
             this.btnSobre = new System.Windows.Forms.Button();
             this.pbConsumidor = new System.Windows.Forms.PictureBox();
             this.pbProdutor = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBox)).BeginInit();
             this.panelBananas.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // panelBananas
             // 
+            this.panelBananas.Controls.Add(this.label1);
             this.panelBananas.Controls.Add(this.pb4);
             this.panelBananas.Controls.Add(this.pb3);
             this.panelBananas.Controls.Add(this.pb2);
@@ -129,7 +131,7 @@
             // 
             // pb1
             // 
-            this.pb1.Image = global::produtor_consumidor.Properties.Resources.box_banana_preenchido;
+            this.pb1.Image = ((System.Drawing.Image)(resources.GetObject("pb1.Image")));
             this.pb1.Location = new System.Drawing.Point(162, 16);
             this.pb1.Name = "pb1";
             this.pb1.Size = new System.Drawing.Size(144, 152);
@@ -138,7 +140,7 @@
             // 
             // pb0
             // 
-            this.pb0.Image = global::produtor_consumidor.Properties.Resources.box_banana_preenchido;
+            this.pb0.Image = ((System.Drawing.Image)(resources.GetObject("pb0.Image")));
             this.pb0.Location = new System.Drawing.Point(12, 16);
             this.pb0.Name = "pb0";
             this.pb0.Size = new System.Drawing.Size(144, 152);
@@ -183,6 +185,15 @@
             this.pbProdutor.TabIndex = 0;
             this.pbProdutor.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Buffer:";
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,6 +216,7 @@
             this.panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBox)).EndInit();
             this.panelBananas.ResumeLayout(false);
+            this.panelBananas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
@@ -231,6 +243,7 @@
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnSobre;
         private System.Windows.Forms.TextBox txtMensagens;
+        private System.Windows.Forms.Label label1;
     }
 }
 
