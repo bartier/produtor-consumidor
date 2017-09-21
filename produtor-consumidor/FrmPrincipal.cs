@@ -50,6 +50,7 @@ namespace produtor_consumidor
             EscreverMensagem("Iniciado simulação do produtor e consumidor!\n");
             iniciadoSimulacao = true;
 
+            // inicia threads do produtor e consumidor
             p.Produzir();
             c.Consumir();
         }
@@ -101,15 +102,11 @@ namespace produtor_consumidor
                 this.Invoke((MethodInvoker)(() => AtualizarTextBox(textBox, conteudo)));
                 console.Release();
                 return;
-            }
+            }       
             
-            for (int i = 0; i < conteudo.Length; i++)
-            {
-                // lanca excessao se fechar o programa quando iniciado a simulacao...
-                txtMensagens.AppendText(conteudo[i].ToString());
-                Application.DoEvents();
-                Thread.Sleep(30);
-            }            
+            txtMensagens.AppendText(conteudo);
+            Application.DoEvents();
+       
         }
 
         private void btnSobre_Click(object sender, EventArgs e)

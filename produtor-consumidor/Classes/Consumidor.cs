@@ -16,6 +16,7 @@ namespace produtor_consumidor.Classes
         private Buffer bufferCompartilhado;
         private Action<string> updateText;
         private Action updateBuffer;
+        private Random r = new Random();
 
         /// <summary>
         /// Instancia um consumidor com o buffer compartilhado e o
@@ -38,15 +39,13 @@ namespace produtor_consumidor.Classes
             new Task(_Consumir).Start();
         }
 
-        Random r = new Random();
         protected  void _Consumir()
         {
             while (true)
             {
-                Thread.Sleep(4000);
                 if (!bufferCompartilhado.Vazio)
                 {
-                    Thread.Sleep(700);
+                    Thread.Sleep(r.Next(4000));
                     bufferCompartilhado.Get();
                     this.updateText("Consumidor: consumiu 1\n");
                     this.updateBuffer();
