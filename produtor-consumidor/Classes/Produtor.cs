@@ -4,36 +4,56 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace produtor_consumidor.Classes
 {
-    class Produtor
+    /// <summary>
+    /// Representação do produtor no problema produtor-consumidor.
+    /// </summary>
+    public class Produtor
     {
-        private string nome;
         private Buffer bufferCompartilhado;
-        private Thread thread;
+        private Action<string> updateText;
+        private Action updateBuffer;
+
+        Random r = new Random();
 
         /// <summary>
-        /// Instancia um produtor com um nome e buffer associado a ele para produção.
+        /// Instancia um produtor com um buffer compartilhado e o
+        /// local onde ele atualizará as informações.
         /// </summary>
-        /// <param name="nome"></param>
-        /// <param name="bufferCompartilhado"></param>
-        public Produtor(string nome, Buffer bufferCompartilhado)
+        /// <param name="bufferCompartilhado">Buffer compartilhado</param>
+        /// <param name="updateText">Usado o método do formulário principal para escrever no "console"</param>
+        public Produtor(Buffer bufferCompartilhado, Action<string> updateText, Action updateBuffer)
         {
-            this.nome = nome;
             this.bufferCompartilhado = bufferCompartilhado;
+            this.updateText = updateText;
+            this.updateBuffer = updateBuffer;
         }
 
-        public string Nome { get { return nome; } }
-
+        /// <summary>
+        /// Cria uma Thread com a lógica do produtor
+        /// </summary>
         public void Produzir()
         {
-            // provavel que seja fazer a chamada do método Set do buffer
-           
-            
-            bufferCompartilhado.Set(1);
-
+            new Task(_Produzir).Start(); 
         }
 
+
+        public void _Produzir()
+        {
+            while (true)
+            {
+                Thread.Sleep(4000);
+                if (!bufferCompartilhado.Cheio)
+                {
+                    Thread.Sleep(100);
+                    bufferCompartilhado.Set(1);
+                    this.updateText("Produtor: produziu 1\n");
+                    this.updateBuffer();
+                }
+            }
+        }
     }
 }
