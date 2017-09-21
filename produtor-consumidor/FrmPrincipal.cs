@@ -1,5 +1,6 @@
 ﻿using produtor_consumidor.Classes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,14 +18,12 @@ namespace produtor_consumidor
     {
         public const int TAMANHO_BUFFER = 5;
 
-        Semaphore console = new Semaphore(1, 1);
+        Semaphore console = new Semaphore(1, 1); // usado para acessos exclusivos no "console"
 
-        private Consumidor consumidor;
-        private Produtor produtor;
         private Classes.Buffer buffer;
 
         private bool iniciadoSimulacao; // usado para controle do formulario
-
+        
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -44,85 +43,73 @@ namespace produtor_consumidor
             // o formulario (5 pictureBox's)
             buffer = new Classes.Buffer(TAMANHO_BUFFER);
 
-            // Criação do produtor chamando o formulário genérico
-            FrmNomeProdutorConsumidor frmGenerico = new FrmNomeProdutorConsumidor("Produtor");
-
-            if (frmGenerico.ShowDialog() == DialogResult.OK)
-            {
-                string nomeProdutor = frmGenerico.NomeDaEntidade;
-
-                produtor = new Produtor(nomeProdutor, buffer);
-            }
-            else
-            {
-                MessageBox.Show("Cancelado simulação!", "Aviso:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-
-            // Criação do consumidor chamando o formulário genérico
-            frmGenerico = new FrmNomeProdutorConsumidor("Consumidor");
-
-            if (frmGenerico.ShowDialog() == DialogResult.OK)
-            {
-                string nomeConsumidor = frmGenerico.NomeDaEntidade;
-
-                consumidor = new Consumidor(nomeConsumidor, buffer);
-            }
-            else
-            {
-                MessageBox.Show("Cancelado simulação!", "Aviso:", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+            Consumidor c = new Consumidor(buffer, EscreverMensagem, AtualizarBuffer);
+            Produtor p = new Produtor(buffer, EscreverMensagem, AtualizarBuffer);
 
             txtMensagens.Text = "";
-            escreverMensagem(produtor.Nome, "Oi, tudo bem " + consumidor.Nome + "?" + " Irei produzir para você algumas bananas!\n");
-            escreverMensagem(consumidor.Nome, "Tudo bem, " + produtor.Nome + "!" + "Estarei no aguardo =)");
-
+            EscreverMensagem("Iniciado simulação do produtor e consumidor!\n");
             iniciadoSimulacao = true;
-            //consumidor.Consumir();
-            //produtor.Produzir();
 
+            p.Produzir();
+            c.Consumir();
         }
 
-        private void escreverMensagem(string nome, string mensagem)
+        private void AtualizarBuffer()
         {
-            string linha = nome + ": " + mensagem;
-            
-            new Task(() => UpdateTextBoxText(txtMensagens, linha)).Start();
+            new Thread(_atualizarBuffer).Start();
         }
 
-        private void escreverMensagem(string mensagem)
+        private void _atualizarBuffer()
         {
-            string linha = mensagem;
+            //the method will invoke itself on the main thread if it isn't already running there
+            if (InvokeRequired)
+            {
+                //picturebox.WaitOne();
+                this.Invoke((MethodInvoker)(() => _atualizarBuffer()));
+                //picturebox.Release();
+                return;
+            }
 
-            new Task(() => UpdateTextBoxText(txtMensagens, mensagem)).Start();
+                for (int i = 0; i < buffer.Tamanho; i++)
+                {
+                    PictureBox pb = ((PictureBox)this.panelBananas.Controls.Find("pb" + i, true)[0]);
+                    if (this.buffer.Ocupado(i)) // posicao ocupada tera imagem com banana
+                    {
+                        pb.Image = Properties.Resources.box_banana_preenchido;
+                    }
+                    else // imagem sem banana
+                    {
+                        pb.Image = Properties.Resources.box_banana;
+                        pb.Refresh();
+                    }
+                Application.DoEvents();
+                }
+         
         }
 
-        private void UpdateTextBoxText(TextBox textBox, string content)
+        public void EscreverMensagem(string mensagem)
+        {
+            new Thread(() => AtualizarTextBox(txtMensagens, mensagem)).Start();
+        }
+
+        private void AtualizarTextBox(TextBox textBox, string conteudo)
         {
             //the method will invoke itself on the main thread if it isn't already running there
             if (InvokeRequired)
             {
                 console.WaitOne();
-                this.Invoke((MethodInvoker)(() => UpdateTextBoxText(textBox, content)));
+                this.Invoke((MethodInvoker)(() => AtualizarTextBox(textBox, conteudo)));
                 console.Release();
                 return;
             }
-
             
-            for (int i = 0; i < content.Length; i++)
+            for (int i = 0; i < conteudo.Length; i++)
             {
-                try
-                {
-                    txtMensagens.AppendText(content[i].ToString());
-                    Application.DoEvents();
-                    Thread.Sleep(30);
-                }
-                catch (Exception)
-                { }
-            }
-            
+                // lanca excessao se fechar o programa quando iniciado a simulacao...
+                txtMensagens.AppendText(conteudo[i].ToString());
+                Application.DoEvents();
+                Thread.Sleep(30);
+            }            
         }
 
         private void btnSobre_Click(object sender, EventArgs e)
