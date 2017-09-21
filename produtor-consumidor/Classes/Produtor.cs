@@ -45,9 +45,10 @@ namespace produtor_consumidor.Classes
         {
             while (true)
             {
+
                 if (!bufferCompartilhado.Cheio)
                 {
-                    Thread.Sleep(r.Next(4000));
+                    Thread.Sleep(r.Next(2000));
                     bufferCompartilhado.Set(1);
                     this.updateText("Produtor: produziu 1\n");
                     this.updateBuffer();

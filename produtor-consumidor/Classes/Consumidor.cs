@@ -45,7 +45,7 @@ namespace produtor_consumidor.Classes
             {
                 if (!bufferCompartilhado.Vazio)
                 {
-                    Thread.Sleep(r.Next(4000));
+                    Thread.Sleep(r.Next(2000));
                     bufferCompartilhado.Get();
                     this.updateText("Consumidor: consumiu 1\n");
                     this.updateBuffer();
