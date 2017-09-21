@@ -21,6 +21,8 @@ namespace produtor_consumidor
         Semaphore console = new Semaphore(1, 1); // usado para acessos exclusivos no "console"
 
         private Classes.Buffer buffer;
+        private Consumidor consumidor;
+        private Produtor produtor;
 
         private string valorProduzido; // usado para desenhar no buffer o valor produzido
 
@@ -45,16 +47,16 @@ namespace produtor_consumidor
             // o formulario (5 pictureBox's)
             buffer = new Classes.Buffer(TAMANHO_BUFFER);
 
-            Consumidor c = new Consumidor(buffer, EscreverMensagem, AtualizarBuffer);
-            Produtor p = new Produtor(buffer, EscreverMensagem, AtualizarBuffer);
+            consumidor = new Consumidor(buffer, EscreverMensagem, AtualizarBuffer);
+            produtor = new Produtor(buffer, EscreverMensagem, AtualizarBuffer);
 
             txtMensagens.Text = "";
-            EscreverMensagem("Iniciado simulação do produtor e consumidor!\n");
+            EscreverMensagem("Iniciado simulação do produtor e consumidor!\n\n");
             simulando = true;
 
             // inicia threads do produtor e consumidor
-            p.Produzir();
-            c.Consumir();
+            produtor.Produzir();
+            consumidor.Consumir();
         }
 
         private void AtualizarBuffer()
@@ -122,7 +124,15 @@ namespace produtor_consumidor
 
         private void btnParar_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException("");
+            if (!simulando)
+                MessageBox.Show("Não há simulação acontecendo!", "Atenção:", MessageBoxButtons.OK);
+
+            produtor.Parar();
+            consumidor.Parar();
+
+            EscreverMensagem("Finalizado simulação! Caso deseje será possível salvar o log.\n");
+
+            simulando = false;      
         }
 
         private void btnSalvarLog_Click(object sender, EventArgs e)

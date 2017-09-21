@@ -16,8 +16,10 @@ namespace produtor_consumidor.Classes
         private Buffer bufferCompartilhado;
         private Action<string> updateText;
         private Action updateBuffer;
+        private Thread t_produtor;
 
         Random r = new Random();
+        private bool continuar = true;
 
         /// <summary>
         /// Instancia um produtor com um buffer compartilhado e o
@@ -37,7 +39,8 @@ namespace produtor_consumidor.Classes
         /// </summary>
         public void Produzir()
         {
-            new Thread(_Produzir).Start(); 
+            t_produtor = new Thread(_Produzir);
+            t_produtor.Start();
         }
 
 
@@ -45,6 +48,8 @@ namespace produtor_consumidor.Classes
         {
             while (true)
             {
+                if (!continuar)
+                    break;
 
                 if (!bufferCompartilhado.Cheio)
                 {
@@ -58,6 +63,14 @@ namespace produtor_consumidor.Classes
                     this.updateBuffer();
                 }
             }
+        }
+
+        /// <summary>
+        /// Para a produção.
+        /// </summary>
+        public void Parar()
+        {
+            continuar = false;
         }
     }
 }
