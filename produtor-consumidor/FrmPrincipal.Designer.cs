@@ -121,6 +121,7 @@
             this.pb4.Size = new System.Drawing.Size(144, 152);
             this.pb4.TabIndex = 4;
             this.pb4.TabStop = false;
+            this.pb4.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_Paint);
             // 
             // pb3
             // 
@@ -130,6 +131,7 @@
             this.pb3.Size = new System.Drawing.Size(144, 152);
             this.pb3.TabIndex = 3;
             this.pb3.TabStop = false;
+            this.pb3.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_Paint);
             // 
             // pb2
             // 
@@ -139,6 +141,7 @@
             this.pb2.Size = new System.Drawing.Size(144, 152);
             this.pb2.TabIndex = 2;
             this.pb2.TabStop = false;
+            this.pb2.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_Paint);
             // 
             // pb1
             // 
@@ -148,6 +151,7 @@
             this.pb1.Size = new System.Drawing.Size(144, 152);
             this.pb1.TabIndex = 1;
             this.pb1.TabStop = false;
+            this.pb1.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_Paint);
             // 
             // pb0
             // 
@@ -157,6 +161,7 @@
             this.pb0.Size = new System.Drawing.Size(144, 152);
             this.pb0.TabIndex = 0;
             this.pb0.TabStop = false;
+            this.pb0.Paint += new System.Windows.Forms.PaintEventHandler(this.pb_Paint);
             // 
             // btnIniciar
             // 

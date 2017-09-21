@@ -95,6 +95,19 @@ namespace produtor_consumidor.Classes
         }
 
         /// <summary>
+        /// Visualisa o valor guardado no buffer no índice desejado.
+        /// </summary>
+        /// <param name="i">Índice desejado</param>
+        /// <returns></returns>
+        public int ValorDe(int i)
+        {
+            if (i > this.Tamanho || i < 0)
+                throw new Exception("Fora do intervalo do buffer");
+            
+            return recursos[i];
+        }
+
+        /// <summary>
         /// Utilizado pelos consumidores para consumir os valores
         /// </summary>
         /// <returns></returns>

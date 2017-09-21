@@ -22,18 +22,20 @@ namespace produtor_consumidor
 
         private Classes.Buffer buffer;
 
-        private bool iniciadoSimulacao; // usado para controle do formulario
-        
+        private string valorProduzido; // usado para desenhar no buffer o valor produzido
+
+        private bool simulando; // usado para controle do formulario  
+              
         public FrmPrincipal()
         {
             InitializeComponent();
 
-            this.iniciadoSimulacao = false;
+            this.simulando = false;
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if (iniciadoSimulacao)
+            if (simulando)
             {
                 MessageBox.Show("Já iniciou uma simulação!");
                 return;
@@ -48,7 +50,7 @@ namespace produtor_consumidor
 
             txtMensagens.Text = "";
             EscreverMensagem("Iniciado simulação do produtor e consumidor!\n");
-            iniciadoSimulacao = true;
+            simulando = true;
 
             // inicia threads do produtor e consumidor
             p.Produzir();
@@ -71,20 +73,24 @@ namespace produtor_consumidor
                 return;
             }
 
-                for (int i = 0; i < buffer.Tamanho; i++)
-                {
-                    PictureBox pb = ((PictureBox)this.panelBananas.Controls.Find("pb" + i, true)[0]);
+            for (int i = 0; i < buffer.Tamanho; i++)
+            {
+                PictureBox pb = ((PictureBox)this.panelBananas.Controls.Find("pb" + i, true)[0]);
+                valorProduzido = buffer.ValorDe(i).ToString();
 
-                    if (this.buffer.Ocupado(i)) // posicao ocupada tera imagem com banana
+                if (this.buffer.Ocupado(i)) // posicao ocupada tera imagem com banana
                     {
-                        pb.Image = Properties.Resources.box_banana_preenchido;                    }
+                        pb.Image = Properties.Resources.box_banana_preenchido;
+
+                    }
                     else // imagem sem banana
                     {
                         pb.Image = Properties.Resources.box_banana;
-                        pb.Refresh();
+                        
                     }
-                Application.DoEvents();
-                }
+
+                pb.Refresh();
+            }
          
         }
 
@@ -122,6 +128,17 @@ namespace produtor_consumidor
         private void btnSalvarLog_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException("");
+        }
+
+        private void pb_Paint(object sender, PaintEventArgs e)
+        {
+            if (!simulando)
+                return;
+
+            using (Font myFont = new Font("Arial", 14))
+            {
+                e.Graphics.DrawString((valorProduzido == "0"? "": valorProduzido), myFont, Brushes.Black, new Point(22, 10));
+            }
         }
     }
 }
