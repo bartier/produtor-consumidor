@@ -52,12 +52,6 @@
     <Compile Include="Classes\Buffer.cs" />
     <Compile Include="Classes\Consumidor.cs" />
     <Compile Include="Classes\Produtor.cs" />
-    <Compile Include="FrmNomeProdutorConsumidor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmNomeProdutorConsumidor.Designer.cs">
-      <DependentUpon>FrmNomeProdutorConsumidor.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,9 +60,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmNomeProdutorConsumidor.resx">
-      <DependentUpon>FrmNomeProdutorConsumidor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
