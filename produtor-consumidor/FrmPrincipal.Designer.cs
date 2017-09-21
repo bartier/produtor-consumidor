@@ -33,6 +33,7 @@
             this.txtMensagens = new System.Windows.Forms.TextBox();
             this.pbBox = new System.Windows.Forms.PictureBox();
             this.panelBananas = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pb4 = new System.Windows.Forms.PictureBox();
             this.pb3 = new System.Windows.Forms.PictureBox();
             this.pb2 = new System.Windows.Forms.PictureBox();
@@ -42,7 +43,8 @@
             this.btnSobre = new System.Windows.Forms.Button();
             this.pbConsumidor = new System.Windows.Forms.PictureBox();
             this.pbProdutor = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnParar = new System.Windows.Forms.Button();
+            this.btnSalvarLog = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBox)).BeginInit();
             this.panelBananas.SuspendLayout();
@@ -102,6 +104,15 @@
             this.panelBananas.Size = new System.Drawing.Size(766, 183);
             this.panelBananas.TabIndex = 3;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Buffer:";
+            // 
             // pb4
             // 
             this.pb4.Image = ((System.Drawing.Image)(resources.GetObject("pb4.Image")));
@@ -159,7 +170,7 @@
             // 
             // btnSobre
             // 
-            this.btnSobre.Location = new System.Drawing.Point(93, 12);
+            this.btnSobre.Location = new System.Drawing.Point(255, 13);
             this.btnSobre.Name = "btnSobre";
             this.btnSobre.Size = new System.Drawing.Size(75, 23);
             this.btnSobre.TabIndex = 5;
@@ -185,14 +196,25 @@
             this.pbProdutor.TabIndex = 0;
             this.pbProdutor.TabStop = false;
             // 
-            // label1
+            // btnParar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Buffer:";
+            this.btnParar.Location = new System.Drawing.Point(93, 13);
+            this.btnParar.Name = "btnParar";
+            this.btnParar.Size = new System.Drawing.Size(75, 23);
+            this.btnParar.TabIndex = 6;
+            this.btnParar.Text = "Parar";
+            this.btnParar.UseVisualStyleBackColor = true;
+            this.btnParar.Click += new System.EventHandler(this.btnParar_Click);
+            // 
+            // btnSalvarLog
+            // 
+            this.btnSalvarLog.Location = new System.Drawing.Point(174, 13);
+            this.btnSalvarLog.Name = "btnSalvarLog";
+            this.btnSalvarLog.Size = new System.Drawing.Size(75, 23);
+            this.btnSalvarLog.TabIndex = 7;
+            this.btnSalvarLog.Text = "Salvar log";
+            this.btnSalvarLog.UseVisualStyleBackColor = true;
+            this.btnSalvarLog.Click += new System.EventHandler(this.btnSalvarLog_Click);
             // 
             // FrmPrincipal
             // 
@@ -200,6 +222,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(838, 636);
+            this.Controls.Add(this.btnSalvarLog);
+            this.Controls.Add(this.btnParar);
             this.Controls.Add(this.btnSobre);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.panelBananas);
@@ -244,6 +268,8 @@
         private System.Windows.Forms.Button btnSobre;
         private System.Windows.Forms.TextBox txtMensagens;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnParar;
+        private System.Windows.Forms.Button btnSalvarLog;
     }
 }
 

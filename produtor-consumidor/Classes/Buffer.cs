@@ -40,6 +40,9 @@ namespace produtor_consumidor.Classes
             }
         }
 
+        /// <summary>
+        /// Retorna o tamanho máximo do buffer.
+        /// </summary>
         public int Tamanho
         {
             get

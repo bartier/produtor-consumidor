@@ -74,10 +74,10 @@ namespace produtor_consumidor
                 for (int i = 0; i < buffer.Tamanho; i++)
                 {
                     PictureBox pb = ((PictureBox)this.panelBananas.Controls.Find("pb" + i, true)[0]);
+
                     if (this.buffer.Ocupado(i)) // posicao ocupada tera imagem com banana
                     {
-                        pb.Image = Properties.Resources.box_banana_preenchido;
-                    }
+                        pb.Image = Properties.Resources.box_banana_preenchido;                    }
                     else // imagem sem banana
                     {
                         pb.Image = Properties.Resources.box_banana;
@@ -112,6 +112,16 @@ namespace produtor_consumidor
         private void btnSobre_Click(object sender, EventArgs e)
         {
             MessageBox.Show("RA: 16174 - Gustavo Ramalho\n RA: 16196 - Vitor Bartier", "Sobre:", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnParar_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException("");
+        }
+
+        private void btnSalvarLog_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException("");
         }
     }
 }

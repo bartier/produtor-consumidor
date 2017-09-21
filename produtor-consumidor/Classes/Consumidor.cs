@@ -36,7 +36,7 @@ namespace produtor_consumidor.Classes
         /// </summary>
         public void Consumir()
         {
-            new Task(_Consumir).Start();
+            new Thread(_Consumir).Start();
         }
 
         protected  void _Consumir()
@@ -46,8 +46,10 @@ namespace produtor_consumidor.Classes
                 if (!bufferCompartilhado.Vazio)
                 {
                     Thread.Sleep(r.Next(2000));
-                    bufferCompartilhado.Get();
-                    this.updateText("Consumidor: consumiu 1\n");
+
+                    int valorConsumido = bufferCompartilhado.Get();
+
+                    this.updateText("Consumidor: consumiu o valor " + valorConsumido + "\n");
                     this.updateBuffer();
                 }
 

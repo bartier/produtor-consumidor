@@ -37,7 +37,7 @@ namespace produtor_consumidor.Classes
         /// </summary>
         public void Produzir()
         {
-            new Task(_Produzir).Start(); 
+            new Thread(_Produzir).Start(); 
         }
 
 
@@ -49,8 +49,12 @@ namespace produtor_consumidor.Classes
                 if (!bufferCompartilhado.Cheio)
                 {
                     Thread.Sleep(r.Next(2000));
-                    bufferCompartilhado.Set(1);
-                    this.updateText("Produtor: produziu 1\n");
+
+                    int valorProduzido = r.Next(1000);
+
+                    bufferCompartilhado.Set(valorProduzido);
+
+                    this.updateText("Produtor: produziu o valor " + valorProduzido + "\n");
                     this.updateBuffer();
                 }
             }
