@@ -45,6 +45,7 @@
             this.pbProdutor = new System.Windows.Forms.PictureBox();
             this.btnParar = new System.Windows.Forms.Button();
             this.btnSalvarLog = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBox)).BeginInit();
             this.panelBananas.SuspendLayout();
@@ -221,6 +222,12 @@
             this.btnSalvarLog.UseVisualStyleBackColor = true;
             this.btnSalvarLog.Click += new System.EventHandler(this.btnSalvarLog_Click);
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.FileName = "simulacao";
+            this.saveFileDialog1.Filter = "txt file|*.txt";
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,6 +282,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnParar;
         private System.Windows.Forms.Button btnSalvarLog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

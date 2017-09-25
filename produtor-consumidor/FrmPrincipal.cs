@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -137,7 +138,26 @@ namespace produtor_consumidor
 
         private void btnSalvarLog_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException("");
+            if (simulando)
+            {
+                MessageBox.Show("Não é possível salvar log durante a simulação!", "Atenção:", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
+
+                sw.WriteLine("Simulação de " + DateTime.Now + "\n");
+
+                foreach (string linha in txtMensagens.Lines)
+                {
+                    sw.WriteLine(linha);
+                }
+
+                sw.Flush();
+                sw.Close();
+            }
         }
 
         private void pb_Paint(object sender, PaintEventArgs e)
