@@ -68,9 +68,10 @@ namespace produtor_consumidor.Classes
         /// <summary>
         /// Para a produção.
         /// </summary>
-        public void Parar()
+        public bool Parar()
         {
             continuar = false;
+            return true;
         }
     }
 }

@@ -128,10 +128,9 @@ namespace produtor_consumidor
             if (!simulando)
                 MessageBox.Show("Não há simulação acontecendo!", "Atenção:", MessageBoxButtons.OK);
 
-            produtor.Parar();
-            consumidor.Parar();
 
-            EscreverMensagem("Finalizado simulação! Caso deseje será possível salvar o log.\n");
+            if (produtor.Parar() && consumidor.Parar())
+                EscreverMensagem("Finalizado simulação! Caso deseje será possível salvar o log.\n");
 
             simulando = false;      
         }

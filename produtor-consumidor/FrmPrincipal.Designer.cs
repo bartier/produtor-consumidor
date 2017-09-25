@@ -225,7 +225,7 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "txt";
-            this.saveFileDialog1.FileName = "simulacao";
+            this.saveFileDialog1.FileName = "z";
             this.saveFileDialog1.Filter = "txt file|*.txt";
             // 
             // FrmPrincipal

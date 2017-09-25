@@ -64,10 +64,11 @@ namespace produtor_consumidor.Classes
         /// <summary>
         /// Para de consumir.
         /// </summary>
-        public void Parar()
+        public bool Parar()
         {
             continuar = false;
             t_consumidor.Join();
+            return true;
         }
     }
 }
