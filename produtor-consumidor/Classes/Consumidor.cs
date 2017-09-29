@@ -51,7 +51,7 @@ namespace produtor_consumidor.Classes
 
                 if (!bufferCompartilhado.Vazio)
                 {
-                    Thread.Sleep(r.Next(2000));
+                    Thread.Sleep(r.Next(200));
 
                     int valorConsumido = bufferCompartilhado.Get();
 

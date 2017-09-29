@@ -53,7 +53,7 @@ namespace produtor_consumidor.Classes
 
                 if (!bufferCompartilhado.Cheio)
                 {
-                    Thread.Sleep(r.Next(2000));
+                    Thread.Sleep(r.Next(200));
 
                     int valorProduzido = r.Next(1000);
 
@@ -71,6 +71,7 @@ namespace produtor_consumidor.Classes
         public bool Parar()
         {
             continuar = false;
+            t_produtor.Join();
             return true;
         }
     }

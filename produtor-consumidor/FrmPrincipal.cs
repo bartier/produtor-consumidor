@@ -130,9 +130,10 @@ namespace produtor_consumidor
 
 
             if (produtor.Parar() && consumidor.Parar())
-                EscreverMensagem("Finalizado simulação! Caso deseje será possível salvar o log.\n");
-
-            simulando = false;      
+            {
+                simulando = false;
+                //EscreverMensagem("Finalizado simulação! Caso deseje será possível salvar o log.\n");
+            }              
         }
 
         private void btnSalvarLog_Click(object sender, EventArgs e)
