@@ -6,7 +6,7 @@ Neste exemplo há a presença de 1 buffer sendo disputado por 1 produtor (thread
 
 ### Instalação
 
-Basta baixar o reposítório e abrir o projeto com o Visual Studio (recomendado 2015) para compilar o projeto.
+Basta baixar o repositório e abrir o projeto com o Visual Studio (recomendado 2015) para compilar o projeto.
 
 ### Imagem do programa
 
